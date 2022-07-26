@@ -1,0 +1,46 @@
+<?php
+// Session start
+session_start();
+
+require_once('../config/config.php');
+
+// Include database configuration
+include '../config/db.php';
+$conn = OpenCon();
+ 
+// Get value from POST form
+$username = $_POST['username'];
+$userpass = $_POST['password'];
+
+$sql = "SELECT * FROM users WHERE username='$username'";
+
+// Execute query
+$result = $conn->query($sql);
+
+// Convert result to array
+$row = $result->fetch_assoc();
+
+// If a user existed in the database
+if (mysqli_num_rows($result) > 0) {
+
+    // Run this
+    // Verify the hashed password with the password inputted by the user
+    if (password_verify($userpass, $row['pass'])){
+
+        // If the password was valid set a global session value (username, project_owner_id)
+        $_SESSION['username'] = $username;
+        $_SESSION['project_id'] = $row['project_owner_id'];
+
+        // Redirect to home page
+        header('Location: '. $base_url . '/horangi_recon/home.php');
+    } else {
+
+        // If login was unsuccessful, redirect to login page with failed message
+        header('Location: ../index.php?message=login_failed');
+    }
+} else {
+    
+    // If login was unsuccessful, redirect to login page with failed message
+    header('Location: ../index.php?message=login_failed');
+}
+?>
