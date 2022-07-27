@@ -1,13 +1,16 @@
 <?php
 session_start();
+include '../config/config.php';
 if (!isset($_SESSION['username'])) {
-  header("Location: ../index.php");
+  header('Location: ' . $base_url . '/index.php');
   die();
 }
+    // Include configuration
+    include '../config/config.php';
     include '../config/db.php';
     $conn = OpenCon();
 
-    $id   = $_GET['id'];
+    $id = $_GET['id'];
     $project_id = $_SESSION['project_id'];
 
     $files = array(
@@ -19,17 +22,19 @@ if (!isset($_SESSION['username'])) {
     );
 
     foreach ($files as $file) {
-      if ( unlink ( '/opt/lampp/htdocs/horangi_recon/scan_results' . '/' . $file ) ) {
+      if ( unlink ( $result_path . '/' . $file ) ) {
         echo 'Scan results successfully deleted!<br />';
       } else {
         echo 'Scan results was not deleted!<br />';
       }
     }
 
-    $sql = "DELETE FROM projects WHERE id='$id'";
-    $conn->query($sql);
+    $sql = "DELETE FROM projects WHERE id = ?";
 
-    $conn->close();
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    CloseCon($stmt);
         
-    header('Location: ../home.php');
+    header('Location: ' . $base_url . '/home.php');
 ?>

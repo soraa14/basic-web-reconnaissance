@@ -1,11 +1,12 @@
 <?php
 session_start();
+    include 'config/db.php';
+    include 'config/config.php';
+    $conn = OpenCon();
 if (!isset($_SESSION['username'])) {
-  header("Location: index.php");
+  header('Location: ' . $base_url . '/index.php');
   die();
 }
-    include 'config/db.php';
-    $conn = OpenCon();
   ?>
 
 <!doctype html>
@@ -16,7 +17,7 @@ if (!isset($_SESSION['username'])) {
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
-    <title>Horangi Recon</title>
+    <title>Basic Web Reconnaissance</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
 
@@ -49,7 +50,7 @@ if (!isset($_SESSION['username'])) {
   <body>
     
   <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Horangi Recon</a>
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Basic Web Reconnaissance</a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -104,6 +105,7 @@ if (!isset($_SESSION['username'])) {
         <table class="table table-striped">
           <thead>
             <tr>
+              <th scope="col">No.</th>
               <th scope="col">Project Name</th>
               <th scope="col">Tools</th>
               <th scope="col">Details</th>
@@ -111,34 +113,49 @@ if (!isset($_SESSION['username'])) {
           </thead>
           <tbody>  
             <?php
+            $limit = 7;
+            $page = @$_GET['page'];
+            if(empty($page)){
+              $position = 0;
+              $position = 1;
+            } else {
+              $position = ($page-1) * $limit;
+            }
+
+            $no = $position + 1;
             $project_id = $_SESSION['project_id'];
-            $sql = "SELECT id, project_name, nikto, whatweb, wafw00f, testssl, dirsearch FROM projects WHERE project_owner_id='$project_id'";
-            $result = $conn->query($sql);
+            $sql = "SELECT id, project_name, nikto, whatweb, wafw00f, testssl, dirsearch FROM projects WHERE project_owner_id = ? limit ?, ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("sii", $project_id, $position, $limit);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
             if ($result->num_rows > 0) {
               // output data of each row
               while($row = $result->fetch_assoc()) { ?>
                 <?= '<tr>' ?>
-
+                <?= '<td>'?>
+                <?= $no++; ?>
+                <?= '</td>'?> 
                 <?= '<td>'?> 
                 <?= htmlspecialchars($row['project_name']); ?> 
                 <?= '</td>' ?>
                 
                 <?= '<td>' ?>
                 <?php
-                if ($row['nikto'] === '1') {
+                if ($row['nikto'] === 1) {
                   echo '<span class="badge bg-dark m-1">Nikto</span>';
                 }
-                if ($row['whatweb'] === '1') {
+                if ($row['whatweb'] === 1) {
                   echo '<span class="badge bg-dark m-1">Whatweb</span>';
                 }
-                if ($row['wafw00f'] === '1') {
+                if ($row['wafw00f'] === 1) {
                   echo '<span class="badge bg-dark m-1">Wafw00f</span>';
                 }
-                if ($row['testssl'] === '1') {
+                if ($row['testssl'] === 1) {
                   echo '<span class="badge bg-dark m-1">Testssl</span>';
                 }
-                if ($row['dirsearch'] === '1') {
+                if ($row['dirsearch'] === 1) {
                   echo '<span class="badge bg-dark m-1">Dirsearch</span>';
                 }
                 ?>
@@ -172,33 +189,40 @@ if (!isset($_SESSION['username'])) {
             } else {
               echo "-";
             }
-            $conn->close();
+            
             ?>
             <?php for ($i = 0; $i <= 2; $i++) { ?>
 
               <?php 
               }
+              $stmt->get_result();
               ?> 
           </tbody>
         </table>
 
+
+<?php
+    $sql2 = "SELECT * FROM projects WHERE project_owner_id = '$project_id'";
+    $result = $conn->query($sql2);
+    $total_data = mysqli_num_rows($result);
+    $total_page = ceil($total_data/$limit);
+    CloseCon($stmt);
+    ?>
         
 
 
         <!-- Pagination -->
         <nav aria-label="...">
           <ul class="pagination">
-            <li class="page-item disabled">
-              <a class="page-link">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active" aria-current="page">
-              <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
-            </li>
+          <?php
+            for($i=1;$i<=$total_page;$i++) {
+                if ($i != $page) {
+                    echo "<li class='page-item'><a class='page-link' href='home.php?page=$i'>$i</a></li>";
+                } else {
+                    echo "<li class='page-item active'><a class='page-link' href='#'>$i</a></li>";
+                }
+            }
+            ?>
           </ul>
         </nav>
         <!-- Pagination End -->

@@ -2,7 +2,9 @@
  
 session_start();
 session_destroy();
- 
-header("Location: ../index.php");
+
+include '../config/config.php';
+
+header('Location: ' . $base_url . '/index.php');
  
 ?>

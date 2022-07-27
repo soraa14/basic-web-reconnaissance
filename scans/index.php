@@ -1,12 +1,13 @@
 <?php
 session_start();
+
+include '../config/config.php';
+include '../config/db.php';
+$conn = OpenCon();
 if (!isset($_SESSION['username'])) {
-  header("Location: ../index.php");
+  header('Location: ' .$base_url . '/index.php');
   die();
 }
-
-    include '../config/db.php';
-    $conn = OpenCon();
   ?>
 <!doctype html>
 <html lang="en">
@@ -87,8 +88,11 @@ if (!isset($_SESSION['username'])) {
         <?php
               $id = $_GET['id'];
               $project_id = $_SESSION['project_id'];
-              $sql = "SELECT id, project_owner_id, urls, project_name, nikto, whatweb, wafw00f, testssl, dirsearch FROM projects WHERE id = '$id' AND project_owner_id ='$project_id'";
-              $result = $conn->query($sql);
+              $sql = "SELECT id, project_owner_id, urls, project_name, nikto, whatweb, wafw00f, testssl, dirsearch FROM projects WHERE id = ? AND project_owner_id = ?";
+              $stmt = $conn->prepare($sql);
+              $stmt->bind_param("is", $id, $project_id);
+              $stmt->execute();
+              $result = $stmt->get_result();
               $value = $result->fetch_assoc();
               ?> 
         <p class="h1"><?= htmlspecialchars($value['project_name']); ?></p>
@@ -115,8 +119,8 @@ if (!isset($_SESSION['username'])) {
 
 
           <?php
-            if ($value['nikto'] === '1') {
-              $parse_filename_nikto = '/opt/lampp/htdocs/horangi_recon/scan_results/nikto_' . $id . '_' . $_SESSION['project_id'] . '.txt';
+            if ($value['nikto'] === 1) {
+              $parse_filename_nikto = $result_path . 'nikto_' . $id . '_' . $_SESSION['project_id'] . '.txt';
               $nikto_result = fopen($parse_filename_nikto, "r") or die("Unable to open file!");
               $nikto_file = fread($nikto_result,filesize($parse_filename_nikto));
               fclose($nikto_result);
@@ -159,8 +163,8 @@ if (!isset($_SESSION['username'])) {
             }
           ?>                          
             <?php
-            if ($value['whatweb'] === '1') {
-              $parse_filename_whatweb = '/opt/lampp/htdocs/horangi_recon/scan_results/whatweb_' . $id . '_' . $_SESSION['project_id'] .'.txt';
+            if ($value['whatweb'] === 1) {
+              $parse_filename_whatweb = $result_path . 'whatweb_' . $id . '_' . $_SESSION['project_id'] .'.txt';
               $whatweb_result = fopen($parse_filename_whatweb, "r") or die("Unable to open file!");
               $whatweb_file = fread($whatweb_result,filesize($parse_filename_whatweb));
               fclose($whatweb_result);
@@ -204,8 +208,8 @@ if (!isset($_SESSION['username'])) {
           ?>  
             
             <?php
-            if ($value['wafw00f'] === '1') {
-              $parse_filename_wafw00f = '/opt/lampp/htdocs/horangi_recon/scan_results/wafw00f_' . $id . '_' . $_SESSION['project_id'] . '.txt';
+            if ($value['wafw00f'] === 1) {
+              $parse_filename_wafw00f = $result_path . 'wafw00f_' . $id . '_' . $_SESSION['project_id'] . '.txt';
               $wafw00f_result = fopen($parse_filename_wafw00f, "r") or die("Unable to open file!");
               $wafw00f_file = fread($wafw00f_result,filesize($parse_filename_wafw00f));
               fclose($wafw00f_result);
@@ -249,8 +253,8 @@ if (!isset($_SESSION['username'])) {
           ?>
             
             <?php
-            if ($value['testssl'] === '1') {
-              $parse_filename_testssl = '/opt/lampp/htdocs/horangi_recon/scan_results/testssl_' . $id . '_' . $_SESSION['project_id'] .'.txt';
+            if ($value['testssl'] === 1) {
+              $parse_filename_testssl = $result_path . 'testssl_' . $id . '_' . $_SESSION['project_id'] .'.txt';
               $testssl_result = fopen($parse_filename_testssl, "r") or die("Unable to open file!");
               $testssl_file = fread($testssl_result,filesize($parse_filename_testssl));
               fclose($testssl_result);
@@ -293,8 +297,8 @@ if (!isset($_SESSION['username'])) {
             }
           ?>
           <?php
-            if ($value['dirsearch'] === '1') {
-              $parse_filename_dirsearch = '/opt/lampp/htdocs/horangi_recon/scan_results/dirsearch_' . $id . '_' . $_SESSION['project_id'] .'.txt';
+            if ($value['dirsearch'] === 1) {
+              $parse_filename_dirsearch = $result_path . 'dirsearch_' . $id . '_' . $_SESSION['project_id'] .'.txt';
               $dirsearch_result = fopen($parse_filename_dirsearch, "r") or die("Unable to open file!");
               $dirsearch_file = fread($dirsearch_result,filesize($parse_filename_dirsearch));
               fclose($dirsearch_result);
@@ -335,6 +339,7 @@ if (!isset($_SESSION['username'])) {
             } else {
               echo '';
             }
+            $stmt->get_result();
           ?>
           </tbody>
         </table>

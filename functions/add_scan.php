@@ -2,7 +2,8 @@
 // Session start
 session_start();
 
-// Include the database configuration
+// Include the configuration
+    include '../config/config.php';
     include '../config/db.php';
     $conn = OpenCon();
 
@@ -23,12 +24,14 @@ session_start();
     
     // Get project_owner_id from session
     $project_id = $_SESSION['project_id'];
-    $sql = "INSERT INTO projects (project_owner_id, project_name, urls, nikto, whatweb, wafw00f, testssl, dirsearch, is_executed) VALUES ('$project_id', '$project_name', '$url', '$nikto', '$whatweb', '$wafw00f', '$testssl', '$dirsearch', '0')";
     
-    // Execute query
-    $conn->query($sql);
-    $conn->close();
+    $sql = "INSERT INTO projects (project_owner_id, project_name, urls, nikto, whatweb, wafw00f, testssl, dirsearch, is_executed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)";
 
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssiiiii", $project_id, $project_name, $url, $nikto, $whatweb, $wafw00f, $testssl, $dirsearch);
+    $stmt->execute();
+    CloseCon($stmt);
+    
     // Redirect to home page
-    header('Location: ../home.php');
+    header('Location: ' . $base_url . '/home.php');
     ?>

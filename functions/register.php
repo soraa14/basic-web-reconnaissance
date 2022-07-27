@@ -1,6 +1,7 @@
 <?php
 
-// Include database configuration
+// Include configuration
+include '../config/config.php';
 include '../config/db.php';
 $conn = OpenCon();
 
@@ -12,7 +13,7 @@ $pass_conf = $_POST['password_conf'];
 
 // If password was not the same as the password confirmation, redirect it to the failed message page
 if($pass != $pass_conf){
-	header("Location: ../register.php?message=failed"); 
+	header('Location: ' .$base_url . '/register.php?message=failed'); 
 } else {
 
     // Hashing password that will be stored on the database
@@ -24,10 +25,12 @@ if($pass != $pass_conf){
 
     $sql = "INSERT INTO users (username, pass, project_owner_id) VALUES ('$username', '$pass_conf', '$project_owner_id')";
     // Execute query
-    $conn->query($sql);
-    $conn->close();
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sss", $username, $pass_conf, $project_owner_id);
+    $stmt->execute();
+    CloseCon($stmt);
     // Redirect to success page
-    header('Location: ../index.php?message=success'); 
+    header('Location: ' .$base_url . '/index.php?message=success'); 
 }
 
 
