@@ -50,7 +50,7 @@ if (!isset($_SESSION['username'])) {
   <body>
     
   <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="../home.php">Horangi Recon</a>
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="../home.php?page=1">Basic Web Reconnaissance</a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -88,7 +88,7 @@ if (!isset($_SESSION['username'])) {
         <?php
               $id = $_GET['id'];
               $project_id = $_SESSION['project_id'];
-              $sql = "SELECT id, project_owner_id, urls, project_name, nikto, whatweb, wafw00f, testssl, dirsearch FROM projects WHERE id = ? AND project_owner_id = ?";
+              $sql = "SELECT id, project_owner_id, urls, project_name, nikto, whatweb, wafw00f, testssl, gobuster FROM projects WHERE id = ? AND project_owner_id = ?";
               $stmt = $conn->prepare($sql);
               $stmt->bind_param("is", $id, $project_id);
               $stmt->execute();
@@ -102,7 +102,7 @@ if (!isset($_SESSION['username'])) {
         <div class="btn-toolbar mb-2 mb-md-0">
         <a href="../functions/export.php"><button type="button" class="btn btn-sm btn-outline-primary m-1"><i class="fa-solid fa-file-export"></i></button></a>
         <a href="../profile.php"><button type="button" class="btn btn-sm btn-outline-dark m-1"><i class="fa-solid fa-user"></i> <?= htmlspecialchars($_SESSION['username']); ?></button></a>
-        <a href="../home.php"><button type="button" class="btn btn-sm btn-outline-success m-1"><i class="fa-solid fa-house"></i> Home</button></a>        
+        <a href="../home.php?page=1"><button type="button" class="btn btn-sm btn-outline-success m-1"><i class="fa-solid fa-house"></i> Home</button></a>        
         </div>
       </div>
 
@@ -297,32 +297,32 @@ if (!isset($_SESSION['username'])) {
             }
           ?>
           <?php
-            if ($value['dirsearch'] === 1) {
-              $parse_filename_dirsearch = $result_path . 'dirsearch_' . $id . '_' . $_SESSION['project_id'] .'.txt';
-              $dirsearch_result = fopen($parse_filename_dirsearch, "r") or die("Unable to open file!");
-              $dirsearch_file = fread($dirsearch_result,filesize($parse_filename_dirsearch));
-              fclose($dirsearch_result);
+            if ($value['gobuster'] === 1) {
+              $parse_filename_gobuster = $result_path . 'gobuster_' . $id . '_' . $_SESSION['project_id'] .'.txt';
+              $gobuster_result = fopen($parse_filename_gobuster, "r") or die("Unable to open file!");
+              $gobuster_file = fread($gobuster_result,filesize($parse_filename_gobuster));
+              fclose($gobuster_result);
               echo '
-              <!-- dirsearch -->
+              <!-- gobuster -->
             <tr>
-            <td class="text-center"><p class="fs-6 fw-semibold">Dirsearch</p></td>
+            <td class="text-center"><p class="fs-6 fw-semibold">Gobuster</p></td>
             <!-- Button trigger modal -->
             <td>
             <div class="d-grid gap-2">
-            <button type="button" class="btn btn-outline-primary btn-sm align-items-end m-1" data-bs-toggle="modal" data-bs-target="#dirsearch_modal">Show Detail</button>
+            <button type="button" class="btn btn-outline-primary btn-sm align-items-end m-1" data-bs-toggle="modal" data-bs-target="#gobuster_modal">Show Detail</button>
           </div>            
             </td>
-            <!-- dirsearch Modal -->
-            <div class="modal fade bd-example-modal-lg" id="dirsearch_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- gobuster Modal -->
+            <div class="modal fade bd-example-modal-lg" id="gobuster_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-lg modal-dialog-scrollable">
                 <div class="modal-content">
                   <div class="modal-header" style="background-color: #353839; color: white;">
-                    <h5 class="modal-title" id="exampleModalLabel"><p class="fs-4 fw-semibold p-1 m-1">Dirsearch Result</p></h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><p class="fs-4 fw-semibold p-1 m-1">Gobuster Result</p></h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="background-color: #353839; color: white;">
                   <pre style="white-space: pre-line;">
-                  ' . $dirsearch_file . '
+                  ' . $gobuster_file . '
                   </pre>
                   </div>
                   <div class="modal-footer" style="background-color: #353839; color: white;">
@@ -331,10 +331,10 @@ if (!isset($_SESSION['username'])) {
                 </div>
               </div>
             </div>
-            <!-- dirsearch Modal End -->
+            <!-- gobuster Modal End -->
             
             </tr>
-            <!-- dirsearch End--> 
+            <!-- gobuster End--> 
               ';
             } else {
               echo '';

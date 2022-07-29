@@ -30,7 +30,7 @@ if (mysqli_num_rows($result) > 0) {
         $_SESSION['project_id'] = $row['project_owner_id'];
 
         // Redirect to home page
-        header('Location: '. $base_url . '/home.php');
+        header('Location: '. $base_url . '/home.php?page=1');
     } else {
 
         // If login was unsuccessful, redirect to login page with failed message

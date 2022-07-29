@@ -122,8 +122,8 @@ if (!isset($_SESSION['username'])) {
         <label class="form-check-label" for="flexSwitchCheckChecked">Testssl</label>
         </div>
         <div class="form-check form-switch">
-        <input class="form-check-input" name="dirsearch_check" type="checkbox" role="switch" id="flexSwitchCheckDefault"
-        <label class="form-check-label" for="flexSwitchCheckChecked">Dirsearch</label>
+        <input class="form-check-input" name="gobuster_check" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+        <label class="form-check-label" for="flexSwitchCheckChecked">Gobuster</label>
         </div>
 
         <div class="d-grid gap-2">

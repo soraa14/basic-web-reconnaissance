@@ -18,7 +18,7 @@ if (!isset($_SESSION['username'])) {
       'whatweb_' . $id . '_' . $project_id . '.txt', 
       'wafw00f_' . $id . '_' . $project_id . '.txt', 
       'testssl_' . $id . '_' . $project_id . '.txt', 
-      'dirsearch_' . $id . '_' . $project_id . '.txt'
+      'gobuster_' . $id . '_' . $project_id . '.txt'
     );
 
     foreach ($files as $file) {
@@ -36,5 +36,5 @@ if (!isset($_SESSION['username'])) {
     $stmt->execute();
     CloseCon($stmt);
         
-    header('Location: ' . $base_url . '/home.php');
+    header('Location: ' . $base_url . '/home.php?page=1');
 ?>

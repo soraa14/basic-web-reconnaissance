@@ -32,12 +32,13 @@ function runWafw00f($url, $id, $project_id, $result_path) {
 
 // testssl
 function runTestssl($url, $id, $project_id, $result_path) {
-    shell_exec('testssl ' . $url . ' | aha --no-header > ' . $result_path . 'testssl_' . $id . '_' . $project_id . '.txt &'); 
+    shell_exec('testssl ' . $url . ' | aha --no-header > ' . $result_path . 'testssl_' . $id . '_' . $project_id . '.txt &');
+    
 }
 
-// dirsearch
-function runDirsearch($url, $id, $project_id, $result_path) {
-    echo 'dirsearch -u ' . $url . ' -w /home/soraa/big.txt | aha --no-header > ' . $result_path . 'dirsearch_' . $id . '_' . $project_id . '.txt'; 
+// gobuster
+function runGobuster($url, $id, $project_id, $result_path) {
+    shell_exec('gobuster dir -u ' . $url . ' -w /home/soraa/wordlist.txt -o ' . $result_path . 'gobuster_' . $id . '_' . $project_id . '.txt &'); 
 }
 
 if ($row['nikto'] === '1') {
@@ -46,7 +47,7 @@ if ($row['nikto'] === '1') {
         $update_exec = "UPDATE projects SET is_executed = '1'";
         $result = $conn->query($update_exec);
     } else {
-        header('Location: ' . $base_url . '/home.php?message=already_executed');
+        header('Location: ' . $base_url . '/home.php?message=already_executed&page=1');
         die();
     }
 }
@@ -57,7 +58,7 @@ if ($row['whatweb'] === '1') {
         $update_exec = "UPDATE projects SET is_executed = '1'";
         $result = $conn->query($update_exec);
     } else {
-        header('Location: ' . $base_url . '/home.php?message=already_executed');
+        header('Location: ' . $base_url . '/home.php?message=already_executed&page=1');
         die();
     }
 }
@@ -68,7 +69,7 @@ if ($row['wafw00f'] === '1') {
         $update_exec = "UPDATE projects SET is_executed = '1'";
         $result = $conn->query($update_exec);
     } else {
-        header('Location: ' . $base_url . '/home.php?message=already_executed');
+        header('Location: ' . $base_url . '/home.php?message=already_executed&page=1');
         die();
     }
 }
@@ -79,18 +80,18 @@ if ($row['testssl'] === '1') {
         $update_exec = "UPDATE projects SET is_executed = '1'";
         $result = $conn->query($update_exec);
     } else {
-        header('Location: ' . $base_url . '/home.php?message=already_executed');
+        header('Location: ' . $base_url . '/home.php?message=already_executed&page=1');
         die();
     }
 }
 
-if ($row['dirsearch'] === '1') {
+if ($row['gobuster'] === '1') {
     if ($row['is_executed'] === '0') {
-        runDirsearch($url, $id, $project_id, $result_path);
+        runGobuster($url, $id, $project_id, $result_path);
         $update_exec = "UPDATE projects SET is_executed = '1'";
         $result = $conn->query($update_exec);
     } else {
-        header('Location: ' . $base_url . '/home.php?message=already_executed');
+        header('Location: ' . $base_url . '/home.php?message=already_executed&page=1');
         die();
     }
 }

@@ -2,7 +2,7 @@
 session_start();
 include 'config/config.php';
 if (isset($_SESSION['username'])) {
-  header('Location: ' . $base_url . '/home.php');
+  header('Location: ' . $base_url . '/home.php?page=1');
 }
 
 

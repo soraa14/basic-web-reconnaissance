@@ -124,7 +124,7 @@ if (!isset($_SESSION['username'])) {
 
             $no = $position + 1;
             $project_id = $_SESSION['project_id'];
-            $sql = "SELECT id, project_name, nikto, whatweb, wafw00f, testssl, dirsearch FROM projects WHERE project_owner_id = ? limit ?, ?";
+            $sql = "SELECT id, project_name, nikto, whatweb, wafw00f, testssl, gobuster FROM projects WHERE project_owner_id = ? limit ?, ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sii", $project_id, $position, $limit);
             $stmt->execute();
@@ -155,8 +155,8 @@ if (!isset($_SESSION['username'])) {
                 if ($row['testssl'] === 1) {
                   echo '<span class="badge bg-dark m-1">Testssl</span>';
                 }
-                if ($row['dirsearch'] === 1) {
-                  echo '<span class="badge bg-dark m-1">Dirsearch</span>';
+                if ($row['gobuster'] === 1) {
+                  echo '<span class="badge bg-dark m-1">Gobuster</span>';
                 }
                 ?>
                 <?= '<td>' ?>
