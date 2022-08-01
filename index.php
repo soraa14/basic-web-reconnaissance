@@ -37,7 +37,6 @@ if (isset($_SESSION['username'])) {
 {
      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
      Registration successful! You may log in..
-     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
    </div>';
 }
 
@@ -45,7 +44,6 @@ if (isset($_GET['message']) && $_GET['message'] == 'login_failed' )
 {
      echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
      Username or password incorrect!
-     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
    </div>';
 }
 ?>
@@ -66,6 +64,16 @@ if (isset($_GET['message']) && $_GET['message'] == 'login_failed' )
     <p class="text-end"><a href="register.php" class="card-link">Register Here!</a></p>
   </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+    $(document).ready(function() {
+        window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, 800);
+    });    
+      </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
   </body>
 </html>

@@ -47,7 +47,7 @@ if ($row['nikto'] === '1') {
         $update_exec = "UPDATE projects SET is_executed = '1'";
         $result = $conn->query($update_exec);
     } else {
-        header('Location: ' . $base_url . '/home.php?message=already_executed&page=1');
+        header('Location: ' . $base_url . '/home.php?page=1&message=already_executed');
         die();
     }
 }
@@ -58,7 +58,7 @@ if ($row['whatweb'] === '1') {
         $update_exec = "UPDATE projects SET is_executed = '1'";
         $result = $conn->query($update_exec);
     } else {
-        header('Location: ' . $base_url . '/home.php?message=already_executed&page=1');
+        header('Location: ' . $base_url . '/home.php?page=1&message=already_executed');
         die();
     }
 }
@@ -69,7 +69,7 @@ if ($row['wafw00f'] === '1') {
         $update_exec = "UPDATE projects SET is_executed = '1'";
         $result = $conn->query($update_exec);
     } else {
-        header('Location: ' . $base_url . '/home.php?message=already_executed&page=1');
+        header('Location: ' . $base_url . '/home.php?page=1&message=already_executed');
         die();
     }
 }
@@ -80,7 +80,7 @@ if ($row['testssl'] === '1') {
         $update_exec = "UPDATE projects SET is_executed = '1'";
         $result = $conn->query($update_exec);
     } else {
-        header('Location: ' . $base_url . '/home.php?message=already_executed&page=1');
+        header('Location: ' . $base_url . '/home.php?page=1&message=already_executed');
         die();
     }
 }
@@ -91,7 +91,7 @@ if ($row['gobuster'] === '1') {
         $update_exec = "UPDATE projects SET is_executed = '1'";
         $result = $conn->query($update_exec);
     } else {
-        header('Location: ' . $base_url . '/home.php?message=already_executed&page=1');
+        header('Location: ' . $base_url . '/home.php?page=1&message=already_executed');
         die();
     }
 }

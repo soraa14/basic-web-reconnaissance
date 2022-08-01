@@ -1,1 +1,0 @@
-/phpmyadmin           (Status: 301) [Size: 236] [--> http://localhost/phpmyadmin/]

@@ -21,6 +21,16 @@ session_start();
     if ( empty($wafw00f) ) $wafw00f = '0';
     if ( empty($testssl) ) $testssl = '0';
     if ( empty($gobuster) ) $gobuster = '0';
+
+    if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) {
+        header('Location: ' . $base_url . '/new_scan.php?message=http_error_1');
+        die('Not a valid URL');
+    }
+
+    if (substr($url , 0, 7) === 'http://' AND $testssl === '1') {
+        header('Location: ' . $base_url . '/new_scan.php?message=http_error_2');
+        die();
+    }
     
     // Get project_owner_id from session
     $project_id = $_SESSION['project_id'];

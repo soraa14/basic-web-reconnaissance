@@ -93,36 +93,61 @@ if (!isset($_SESSION['username'])) {
       </div>
 
       <!-- Main Section -->
+      <?php
+if (isset($_GET['message']) && $_GET['message'] == 'http_error_1' )
+{
+     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+     Invalid URL value!
+   </div>';
+}
+
+if (isset($_GET['message']) && $_GET['message'] == 'http_error_2' )
+{
+     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+     Cannot use http:// on testssl scan. Use https:// instead.
+   </div>';
+}
+?>
       <form method="post" action="functions/add_scan.php">
         <label for="basic-url" class="form-label">Project Name</label>
         <div class="input-group mb-3">
         <input type="text" class="form-control" name="project_name" placeholder="Project Name" aria-label="project-name" aria-describedby="basic-addon1" required>
         </div>
-
         <label for="basic-url" class="form-label">URL</label>
         <div class="input-group mb-3">
         <input type="text" class="form-control" name="url" placeholder="e.g https://example.com" aria-label="Recipient's username" aria-describedby="basic-addon2" required>
         </div>
 
         <label for="basic-url" class="form-label">Select Tools:</label>
-        <div class="form-check form-switch">
-        <input class="form-check-input" name="nikto_check" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-        <label class="form-check-label" for="flexSwitchCheckDefault">Nikto</label>
+
+        <div class="form-check form-switch">      
+        <label class="form-check-label" for="flexSwitchCheckDefault">Nikto
+        <input class="form-check-input" name="nikto_check" type="checkbox" role="switch" id="flexSwitchCheckDefault"></input>
+        </label>
         </div>
+
+        <!-- whatweb form -->
         <div class="form-check form-switch">
-        <input class="form-check-input" name="whatweb_check" type="checkbox" role="switch" id="flexSwitchCheckDefault1">
-        <label class="form-check-label" for="flexSwitchCheckDefault">Whatweb</label>
+        <label class="form-check-label" for="flexSwitchCheckDefault">Whatweb
+        <input class="form-check-input" name="whatweb_check" type="checkbox" role="switch" id="whatweb_chk"></input>
         </div>
+
+        <div id="whatweb_ua" style="display: none;">
+        <input type="text" class="form-control" name="url" placeholder="e.g https://example.com" style="width: 250px"></input>
+        </div>
+        
         <div class="form-check form-switch">
-        <input class="form-check-input" name="wafw00f_check" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <input class="form-check-input" name="wafw00f_check" type="checkbox" role="switch" id="flexSwitchCheckDefault"></input>
         <label class="form-check-label" for="flexSwitchCheckChecked">Wafw00f</label>
         </div>
+
         <div class="form-check form-switch">
-        <input class="form-check-input" name="testssl_check" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+        <input class="form-check-input" name="testssl_check" type="checkbox" role="switch" id="flexSwitchCheckDefault"></input>
         <label class="form-check-label" for="flexSwitchCheckChecked">Testssl</label>
         </div>
+
         <div class="form-check form-switch">
-        <input class="form-check-input" name="gobuster_check" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+        <input class="form-check-input" name="gobuster_check" type="checkbox" role="switch" id="flexSwitchCheckDefault"></input>
         <label class="form-check-label" for="flexSwitchCheckChecked">Gobuster</label>
         </div>
 
@@ -160,6 +185,26 @@ for (let i = 0; i < inputSubmit.length; i++) {
 </script>
 
     <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+    $(document).ready(function() {
+        window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, 1500);
+    });    
+
+    $(function () {
+        $("#whatweb_chk").click(function () {
+            if ($(this).is(":checked")) {
+                $("#whatweb_ua").show();
+            } else {
+                $("#whatweb_ua").hide();
+            }
+        });
+    });
+      </script>
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
     </body>
 </html>
