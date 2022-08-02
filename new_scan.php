@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'config/db.php';
+include 'config/config.php';
 $conn = OpenCon();
 if (!isset($_SESSION['username'])) {
   header('Location: ' . $base_url . '/index.php');
@@ -107,7 +108,15 @@ if (isset($_GET['message']) && $_GET['message'] == 'http_error_2' )
      Cannot use http:// on testssl scan. Use https:// instead.
    </div>';
 }
+
+if (isset($_GET['message']) && $_GET['message'] == 'http_error_3' )
+{
+     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+     Choose a wordlist on Gobuster scan!
+   </div>';
+}
 ?>
+
       <form method="post" action="functions/add_scan.php">
         <label for="basic-url" class="form-label">Project Name</label>
         <div class="input-group mb-3">
@@ -128,27 +137,55 @@ if (isset($_GET['message']) && $_GET['message'] == 'http_error_2' )
 
         <!-- whatweb form -->
         <div class="form-check form-switch">
-        <label class="form-check-label" for="flexSwitchCheckDefault">Whatweb
+        <label class="form-check-label" for="flexSwitchCheckDefault">Whatweb</label>
         <input class="form-check-input" name="whatweb_check" type="checkbox" role="switch" id="whatweb_chk"></input>
         </div>
 
-        <div id="whatweb_ua" style="display: none;">
-        <input type="text" class="form-control" name="url" placeholder="e.g https://example.com" style="width: 250px"></input>
+        <div id="whatweb_params" style="display: none;" class="m-2">
+          <label class="form-check-label" for="flexSwitchCheckDefault">User Agent</label>
+          <input type="text" class="form-control" name="whatweb_ua" placeholder="e.g Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0" style="width: 50%"></input>
+          <label class="form-check-label" for="flexSwitchCheckDefault">Custom Headers</label>
+          <input type="text" class="form-control" name="whatweb_header" placeholder="eg Foo:Bar" style="width: 50%"></input>  
         </div>
         
         <div class="form-check form-switch">
-        <input class="form-check-input" name="wafw00f_check" type="checkbox" role="switch" id="flexSwitchCheckDefault"></input>
+        <input class="form-check-input" name="wafw00f_check" type="checkbox" role="switch" id=""></input>
         <label class="form-check-label" for="flexSwitchCheckChecked">Wafw00f</label>
         </div>
 
         <div class="form-check form-switch">
-        <input class="form-check-input" name="testssl_check" type="checkbox" role="switch" id="flexSwitchCheckDefault"></input>
+        <input class="form-check-input" name="testssl_check" type="checkbox" role="switch" id=""></input>
         <label class="form-check-label" for="flexSwitchCheckChecked">Testssl</label>
         </div>
 
         <div class="form-check form-switch">
-        <input class="form-check-input" name="gobuster_check" type="checkbox" role="switch" id="flexSwitchCheckDefault"></input>
+        <input class="form-check-input" name="gobuster_check" type="checkbox" role="switch" id="gobuster_chk"></input>
         <label class="form-check-label" for="flexSwitchCheckChecked">Gobuster</label>
+        </div>
+
+        <div id="gobuster_params" style="display: none;" class="m-2">
+          <span class="fw-semibold">Wordlist: <span class="fst-italic text-muted">(required)</span></span>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="flexRadioDefault1" value="common.txt" name="gobuster_wordlist">
+          <label class="form-check-label" for="flexRadioDefault1">
+            common.txt <a href="https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/common.txt" class="text-decoration-none">[Source]</a>
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="flexRadioDefault1" value="big.txt" name="gobuster_wordlist">
+          <label class="form-check-label" for="flexRadioDefault1">
+            big.txt <a href="https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/big.txt" class="text-decoration-none">[Source]</a>
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="flexRadioDefault1" value="directory-list-2.3-medium.txt" name="gobuster_wordlist">
+          <label class="form-check-label" for="flexRadioDefault1">
+            directory-list-2.3-medium.txt <a href="https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/directory-list-2.3-medium.txt" class="text-decoration-none">[Source]</a>
+          </label>
+        </div>
         </div>
 
         <div class="d-grid gap-2">
@@ -198,12 +235,23 @@ for (let i = 0; i < inputSubmit.length; i++) {
     $(function () {
         $("#whatweb_chk").click(function () {
             if ($(this).is(":checked")) {
-                $("#whatweb_ua").show();
+                $("#whatweb_params").show();
             } else {
-                $("#whatweb_ua").hide();
+                $("#whatweb_params").hide();
             }
         });
     });
+
+    $(function () {
+        $("#gobuster_chk").click(function () {
+            if ($(this).is(":checked")) {
+                $("#gobuster_params").show();
+            } else {
+                $("#gobuster_params").hide();
+            }
+        });
+    });
+
       </script>
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
     </body>

@@ -1,0 +1,22 @@
+
+                <span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:gray;">______
+               /      \
+              (  W00f! )
+               \  ____/
+               ,,    </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:green;">__            </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:olive;">404 Hack Not Found
+           </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:teal;">|`-.__   </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:green;">/ /                     </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:red;"> __     __
+           </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:teal;">/&quot;  _/  </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:green;">/_/                       </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:red;">\ \   / /
+          </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:blue;">*===*    </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:green;">/                          </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:red;">\ \_/ /  </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:olive;">405 Not Allowed
+         </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:teal;">/     )__//                           </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:red;">\   /
+    </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:teal;">/|  /     /---`                        </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:olive;">403 Forbidden
+    </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:teal;">\\/`   \ |                                 </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:red;">/ _ \
+    </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:teal;">`\    /_\\_              </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:olive;">502 Bad Gateway  </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:red;">/ / \ \  </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:olive;">500 Internal Error
+      </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:teal;">`_____``-`                             </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:red;">/_/   \_\
+
+                        </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:teal;">~ WAFW00F : </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:blue;">v2.1.0 ~</span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:gray;">
+        The Web Application Firewall Fingerprinting Toolkit
+    </span>
+[*] Checking http://localhost
+[+] Generic Detection results:
+[-] No WAF detected by the generic detection
+[~] Number of requests: 7
