@@ -17,34 +17,34 @@ session_start();
 
 // nikto
 function runNikto($url, $id, $project_id, $result_path) {
-    shell_exec('nikto -host ' . $url . ' | aha --no-header > ' . $result_path . 'nikto_' . $id . '_' . $project_id . '.txt &'); 
+    shell_exec('nikto -host ' . $url . ' | aha --title export_nikto > ' . $result_path . 'nikto_' . $id . '_' . $project_id . '.txt &'); 
 }
 
 // whatweb
 function runWhatweb($url, $id, $project_id, $result_path) {
-    shell_exec('whatweb -v ' . $url . ' | aha --no-header > ' . $result_path . 'whatweb_' . $id . '_' . $project_id . '.txt &'); 
+    shell_exec('whatweb -v ' . $url . ' | aha --title export_whatweb > ' . $result_path . 'whatweb_' . $id . '_' . $project_id . '.txt &'); 
 }
 
 function runWhatwebUserAgent($url, $id, $project_id, $result_path, $params) {
-    shell_exec('whatweb --user-agent ' . $params . ' -v ' . $url . ' | aha --no-header > ' . $result_path . 'whatweb_' . $id . '_' . $project_id . '.txt &'); 
+    shell_exec('whatweb --user-agent ' . $params . ' -v ' . $url . ' | aha --title export_whatweb > ' . $result_path . 'whatweb_' . $id . '_' . $project_id . '.txt &'); 
 }
 
 function runWhatwebHeader($url, $id, $project_id, $result_path, $params) {
-    shell_exec('whatweb --header ' . $params . ' -v ' . $url . ' | aha --no-header > ' . $result_path . 'whatweb_' . $id . '_' . $project_id . '.txt &'); 
+    shell_exec('whatweb --header ' . $params . ' -v ' . $url . ' | aha --title export_whatweb > ' . $result_path . 'whatweb_' . $id . '_' . $project_id . '.txt &'); 
 }
 
 function runWhatwebAllParams($url, $id, $project_id, $result_path, $param1, $param2) {
-    shell_exec('whatweb --user-agent ' . $param1 . ' --header ' . $param2 . ' -v ' . $url . ' | aha --no-header > ' . $result_path . 'whatweb_' . $id . '_' . $project_id . '.txt &'); 
+    shell_exec('whatweb --user-agent ' . $param1 . ' --header ' . $param2 . ' -v ' . $url . ' | aha --title export_whatweb > ' . $result_path . 'whatweb_' . $id . '_' . $project_id . '.txt &'); 
 }
 
 // wafw00f
 function runWafw00f($url, $id, $project_id, $result_path) {
-    shell_exec('wafw00f ' . $url . ' | aha --no-header > ' . $result_path . 'wafw00f_' . $id . '_' . $project_id . '.txt &'); 
+    shell_exec('wafw00f ' . $url . ' | aha --title export_wafw00f > ' . $result_path . 'wafw00f_' . $id . '_' . $project_id . '.txt &'); 
 }
 
 // testssl
 function runTestssl($url, $id, $project_id, $result_path) {
-    shell_exec('testssl ' . $url . ' | aha --no-header > ' . $result_path . 'testssl_' . $id . '_' . $project_id . '.txt &');
+    shell_exec('testssl ' . $url . ' | aha --title export_testssl > ' . $result_path . 'testssl_' . $id . '_' . $project_id . '.txt &');
     
 }
 
@@ -145,4 +145,4 @@ if ($row['gobuster'] === '1') {
         die();
     }
 }
-// header('Location: ' . $base_url . '/home.php?page=1');
+header('Location: ' . $base_url . '/home.php?page=1');

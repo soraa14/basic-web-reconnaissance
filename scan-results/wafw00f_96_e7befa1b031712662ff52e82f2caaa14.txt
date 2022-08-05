@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- This file was created with the aha Ansi HTML Adapter. https://github.com/theZiz/aha -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xml+xhtml; charset=UTF-8"/>
+<title>export_wafw00f</title>
+</head>
+<body>
+<pre>
+
+                   <span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:gray;">______
+                  /      \
+                 (  Woof! )
+                  \  ____/                      </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:red;">)
+                  </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:gray;">,,                           </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:red;">) (</span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:olive;">_
+             .-. </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:gray;">-    </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:green;">_______                 </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:red;">( </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:olive;">|__|
+            ()``; </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:green;">|==|_______)                </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:red;">.)</span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:olive;">|__|
+            / ('        </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:green;">/|\                  </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:red;">(  </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:olive;">|__|
+        (  /  )       </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:green;"> / | \                  </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:red;">. </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:olive;">|__|
+         \(_)_))      </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:green;">/  |  \                   </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:olive;">|__|</span>
+
+                    <span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:teal;">~ WAFW00F : </span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:blue;">v2.1.0 ~</span><span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:gray;">
+    The Web Application Firewall Fingerprinting Toolkit
+    </span>
+[*] Checking https://example.com
+[+] The site <span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:blue;">https://example.com</span> is behind <span style="font-weight:bold;filter: contrast(70%) brightness(190%);color:teal;">Edgecast (Verizon Digital Media)</span> WAF.
+[~] Number of requests: 2
+</pre>
+</body>
+</html>
