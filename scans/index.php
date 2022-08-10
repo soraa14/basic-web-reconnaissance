@@ -72,13 +72,6 @@ if (!isset($_SESSION['username'])) {
               Scans
             </a>
           </li>
-
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">
-              <span data-feather="reports"></span>
-              Reports
-            </a>
-          </li>
         </ul>
     </nav>
 
