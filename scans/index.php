@@ -236,7 +236,7 @@ if (!isset($_SESSION['username'])) {
               <div class="modal-dialog modal-xl modal-dialog-scrollable">
                 <div class="modal-content">
                   <div class="modal-header" style="background-color: #353839; color: white;">
-                    <h5 class="modal-title" id="exampleModalLabel"><p class="fs-4 fw-semibold p-1 m-1">Whatweb Result</p></h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><p class="fs-4 fw-semibold p-1 m-1">Wafw00f Result</p></h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="background-color: #353839; color: white;">
