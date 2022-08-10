@@ -21,10 +21,10 @@ if (!isset($_SESSION['username'])) {
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
 
-    
+
 
     <!-- Bootstrap core CSS -->
-<link href=" 	https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="    https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -42,13 +42,13 @@ if (!isset($_SESSION['username'])) {
       }
     </style>
 
-    
+
     <!-- Custom styles for this template -->
     <link href="assets/css/dashboard.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/6c966798cf.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    
+
   <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Basic Web Reconnaissance</a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,7 +72,7 @@ if (!isset($_SESSION['username'])) {
             </a>
           </li>
 
-          
+
         </ul>
     </nav>
 
@@ -80,9 +80,9 @@ if (!isset($_SESSION['username'])) {
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2 fw-semibold"><i class="fa-solid fa-magnifying-glass"></i> Scans</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <a href="profile.php"><button type="button" class="btn btn-sm btn-outline-dark m-1"><i class="fa-solid fa-user"></i> <?= htmlspecialchars($_SESSION['username']); ?></button></a>
+            <button class="btn btn-sm btn-dark m-1" disabled><i class="fa-solid fa-user"></i> <?= htmlspecialchars($_SESSION['username']); ?></button>
             <a href="new_scan.php"><button type="button" class="btn btn-sm btn-outline-success m-1"><i class="fa-solid fa-magnifying-glass-plus"></i> New Scan</button></a>
-          
+
         </div>
       </div>
 
@@ -105,7 +105,7 @@ if (!isset($_SESSION['username'])) {
               <th scope="col">Details</th>
             </tr>
           </thead>
-          <tbody>  
+          <tbody>
             <?php
             $limit = 7;
             $page = @$_GET['page'];
@@ -130,11 +130,11 @@ if (!isset($_SESSION['username'])) {
                 <?= '<tr>' ?>
                 <?= '<td>'?>
                 <?= $no++; ?>
-                <?= '</td>'?> 
-                <?= '<td>'?> 
-                <?= htmlspecialchars($row['project_name']); ?> 
+                <?= '</td>'?>
+                <?= '<td>'?>
+                <?= htmlspecialchars($row['project_name']); ?>
                 <?= '</td>' ?>
-                
+
                 <?= '<td>' ?>
                 <?php
                 if ($row['nikto'] === 1) {
@@ -172,9 +172,10 @@ if (!isset($_SESSION['username'])) {
                         <div class="row">
                           <div class="col-sm-12 text-center">
                           <?= '<a href="functions/delete.php?id=' . $row['id'] . ' "><button type="button" class="btn btn-success m-1" style="width:220px;" data-bs-dismiss="modal">Yes</button></a>' ?>
-                            <button type="button" class="btn btn-danger m-1" style="width:220px;" data-bs-dismiss="modal">No</button> 
+                            <button type="button" class="btn btn-danger m-1" style="width:220px;" data-bs-dismiss="modal">No</button>
+
                         </div>
-                        </div>    
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -183,14 +184,14 @@ if (!isset($_SESSION['username'])) {
             } else {
               echo "-";
             }
-            
+
             ?>
             <?php for ($i = 0; $i <= 2; $i++) { ?>
 
-              <?php 
+              <?php
               }
               $stmt->get_result();
-              ?> 
+              ?>
           </tbody>
         </table>
 
@@ -202,7 +203,7 @@ if (!isset($_SESSION['username'])) {
     $total_page = ceil($total_data/$limit);
     CloseCon($stmt);
     ?>
-        
+
 
 
         <!-- Pagination -->
@@ -235,7 +236,7 @@ if (!isset($_SESSION['username'])) {
                 $(this).remove();
             });
         }, 800);
-    });    
+    });
       </script>
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
   </body>
