@@ -88,7 +88,7 @@ if (!isset($_SESSION['username'])) {
         <?php
               $id = $_GET['id'];
               $project_id = $_SESSION['project_id'];
-              $sql = "SELECT id, project_owner_id, urls, project_name, nikto, whatweb, wafw00f, testssl, gobuster FROM projects WHERE id = ? AND project_owner_id = ?";
+              $sql = "SELECT id, project_owner_id, urls, project_name, nikto, whatweb, wafw00f, testssl, feroxbuster FROM projects WHERE id = ? AND project_owner_id = ?";
               $stmt = $conn->prepare($sql);
               $stmt->bind_param("is", $id, $project_id);
               $stmt->execute();
@@ -100,7 +100,6 @@ if (!isset($_SESSION['username'])) {
         <p class="h5 text-muted"><em><?= htmlspecialchars($value['urls']); ?></em></p>
         </h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-        <a href="../functions/export.php"><button type="button" class="btn btn-sm btn-outline-primary m-1"><i class="fa-solid fa-file-export"></i></button></a>
         <a href="../profile.php"><button type="button" class="btn btn-sm btn-outline-dark m-1"><i class="fa-solid fa-user"></i> <?= htmlspecialchars($_SESSION['username']); ?></button></a>
         <a href="../home.php?page=1"><button type="button" class="btn btn-sm btn-outline-success m-1"><i class="fa-solid fa-house"></i> Home</button></a>        
         </div>
@@ -113,6 +112,7 @@ if (!isset($_SESSION['username'])) {
             <tr>
               <th scope="col">Tools</th>
               <th scope="col">Details</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>  
@@ -120,9 +120,9 @@ if (!isset($_SESSION['username'])) {
 
           <?php
             if ($value['nikto'] === 1) {
-              $parse_filename_nikto = $result_path . 'nikto_' . $id . '_' . $_SESSION['project_id'] . '.txt';
-              $nikto_result = fopen($parse_filename_nikto, "r") or die("Unable to open file!");
-              $nikto_file = fread($nikto_result,filesize($parse_filename_nikto));
+              $parse_filename_nikto = $result_path . 'nikto_' . $id . '_' . $_SESSION['project_id'] . '.html';
+              $nikto_result = @fopen($parse_filename_nikto, "r") or die("Unable to open file!");
+              $nikto_file = @fread($nikto_result,filesize($parse_filename_nikto));
               fclose($nikto_result);
               echo '
               <!-- Nikto -->
@@ -135,8 +135,8 @@ if (!isset($_SESSION['username'])) {
           </div>            
             </td>
             <!-- Nikto Modal -->
-            <div class="modal fade bd-example-modal-lg" id="nikto_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal fade bd-example-modal-xl" id="nikto_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-xl modal-dialog-scrollable">
                 <div class="modal-content">
                   <div class="modal-header" style="background-color: #353839; color: white;">
                     <h5 class="modal-title" id="exampleModalLabel"><p class="fs-4 fw-semibold">Nikto Result</p></h5>
@@ -153,6 +153,12 @@ if (!isset($_SESSION['username'])) {
             </div>
             <!-- Nikto Modal End -->
             
+            <td>
+            <div class="d-grid gap-2">
+            <a href="' . $base_url . '/scan-results/' . 'nikto_' . $id . '_' . $_SESSION['project_id'] . '.html" class="btn btn-outline-secondary btn-sm align-items-end m-1" download><i class="fa-solid fa-file-export"></i> Export</a>
+          </div>            
+            </td>
+
             </tr>
             <!-- Nikto End--> 
               ';
@@ -162,9 +168,9 @@ if (!isset($_SESSION['username'])) {
           ?>                          
             <?php
             if ($value['whatweb'] === 1) {
-              $parse_filename_whatweb = $result_path . 'whatweb_' . $id . '_' . $_SESSION['project_id'] .'.txt';
-              $whatweb_result = fopen($parse_filename_whatweb, "r") or die("Unable to open file!");
-              $whatweb_file = fread($whatweb_result,filesize($parse_filename_whatweb));
+              $parse_filename_whatweb = $result_path . 'whatweb_' . $id . '_' . $_SESSION['project_id'] .'.html';
+              $whatweb_result = @fopen($parse_filename_whatweb, "r") or die("Unable to open file!");
+              $whatweb_file = @fread($whatweb_result,filesize($parse_filename_whatweb));
               fclose($whatweb_result);
               echo '
               <!-- Whatweb -->
@@ -177,8 +183,8 @@ if (!isset($_SESSION['username'])) {
           </div>            
             </td>
             <!-- Whatweb Modal -->
-            <div class="modal fade bd-example-modal-lg" id="whatweb_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal fade bd-example-modal-xl" id="whatweb_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-xl modal-dialog-scrollable">
                 <div class="modal-content">
                   <div class="modal-header" style="background-color: #353839; color: white;">
                     <h5 class="modal-title" id="exampleModalLabel"><p class="fs-4 fw-semibold p-1 m-1">Whatweb Result</p></h5>
@@ -195,6 +201,12 @@ if (!isset($_SESSION['username'])) {
             </div>
             <!-- Whatweb Modal End -->
             
+            <td>
+            <div class="d-grid gap-2">
+            <a href="' . $base_url . '/scan-results/' . 'whatweb_' . $id . '_' . $_SESSION['project_id'] . '.html" class="btn btn-outline-secondary btn-sm align-items-end m-1" download><i class="fa-solid fa-file-export"></i> Export</a>
+          </div>            
+            </td>
+
             </tr>
             <!-- Whatweb End--> 
               ';
@@ -205,9 +217,9 @@ if (!isset($_SESSION['username'])) {
             
             <?php
             if ($value['wafw00f'] === 1) {
-              $parse_filename_wafw00f = $result_path . 'wafw00f_' . $id . '_' . $_SESSION['project_id'] . '.txt';
-              $wafw00f_result = fopen($parse_filename_wafw00f, "r") or die("Unable to open file!");
-              $wafw00f_file = fread($wafw00f_result,filesize($parse_filename_wafw00f));
+              $parse_filename_wafw00f = $result_path . 'wafw00f_' . $id . '_' . $_SESSION['project_id'] . '.html';
+              $wafw00f_result = @fopen($parse_filename_wafw00f, "r") or die("Unable to open file!");
+              $wafw00f_file = @fread($wafw00f_result,filesize($parse_filename_wafw00f));
               fclose($wafw00f_result);
               echo '
               <!-- Wafw00f -->
@@ -220,8 +232,8 @@ if (!isset($_SESSION['username'])) {
           </div>            
             </td>
             <!-- Wafw00f Modal -->
-            <div class="modal fade bd-example-modal-lg" id="wafw00f_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal fade bd-example-modal-xl" id="wafw00f_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-xl modal-dialog-scrollable">
                 <div class="modal-content">
                   <div class="modal-header" style="background-color: #353839; color: white;">
                     <h5 class="modal-title" id="exampleModalLabel"><p class="fs-4 fw-semibold p-1 m-1">Whatweb Result</p></h5>
@@ -238,6 +250,12 @@ if (!isset($_SESSION['username'])) {
             </div>
             <!-- Wafw00f Modal End -->
             
+            <td>
+            <div class="d-grid gap-2">
+            <a href="' . $base_url . '/scan-results/' . 'wafw00f_' . $id . '_' . $_SESSION['project_id'] . '.html" class="btn btn-outline-secondary btn-sm align-items-end m-1" download><i class="fa-solid fa-file-export"></i> Export</a>
+          </div>            
+            </td>
+
             </tr>
             <!-- Wafw00f End--> 
               ';
@@ -248,9 +266,9 @@ if (!isset($_SESSION['username'])) {
             
             <?php
             if ($value['testssl'] === 1) {
-              $parse_filename_testssl = $result_path . 'testssl_' . $id . '_' . $_SESSION['project_id'] .'.txt';
-              $testssl_result = fopen($parse_filename_testssl, "r") or die("Unable to open file!");
-              $testssl_file = fread($testssl_result,filesize($parse_filename_testssl));
+              $parse_filename_testssl = $result_path . 'testssl_' . $id . '_' . $_SESSION['project_id'] .'.html';
+              $testssl_result = @fopen($parse_filename_testssl, "r") or die("Unable to open file!");
+              $testssl_file = @fread($testssl_result,filesize($parse_filename_testssl));
               fclose($testssl_result);
               echo '
               <!-- testssl -->
@@ -263,7 +281,7 @@ if (!isset($_SESSION['username'])) {
           </div>            
             </td>
             <!-- testssl Modal -->
-            <div class="modal fade bd-example-modal-lg" id="testssl_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade bd-example-modal-xl" id="testssl_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-xl modal-dialog-scrollable">
                 <div class="modal-content">
                   <div class="modal-header" style="background-color: #353839; color: white;">
@@ -271,9 +289,7 @@ if (!isset($_SESSION['username'])) {
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="background-color: #353839; color: white;">
-                  <pre>
                   ' . $testssl_file . '
-                  </pre>
                   </div>
                   <div class="modal-footer" style="background-color: #353839; color: white;">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -283,6 +299,12 @@ if (!isset($_SESSION['username'])) {
             </div>
             <!-- testssl Modal End -->
             
+            <td>
+            <div class="d-grid gap-2">
+            <a href="' . $base_url . '/scan-results/' . 'testssl_' . $id . '_' . $_SESSION['project_id'] . '.html" class="btn btn-outline-secondary btn-sm align-items-end m-1" download><i class="fa-solid fa-file-export"></i> Export</a>
+          </div>            
+            </td>
+
             </tr>
             <!-- testssl End--> 
               ';
@@ -291,33 +313,31 @@ if (!isset($_SESSION['username'])) {
             }
           ?>
           <?php
-            if ($value['gobuster'] === 1) {
-              $parse_filename_gobuster = $result_path . 'gobuster_' . $id . '_' . $_SESSION['project_id'] .'.txt';
-              $gobuster_result = fopen($parse_filename_gobuster, "r") or die("Unable to open file!");
-              $gobuster_file = fread($gobuster_result,filesize($parse_filename_gobuster));
-              fclose($gobuster_result);
+            if ($value['feroxbuster'] === 1) {
+              $parse_filename_feroxbuster = $result_path . 'feroxbuster_' . $id . '_' . $_SESSION['project_id'] .'.html';
+              $feroxbuster_result = @fopen($parse_filename_feroxbuster, "r") or die("Unable to open file!");
+              $feroxbuster_file = @fread($feroxbuster_result,filesize($parse_filename_feroxbuster));
+              fclose($feroxbuster_result);
               echo '
-              <!-- gobuster -->
+              <!-- feroxbuster -->
             <tr>
-            <td class="text-center"><p class="fs-6 fw-semibold">Gobuster</p></td>
+            <td class="text-center"><p class="fs-6 fw-semibold">Feroxbuster</p></td>
             <!-- Button trigger modal -->
             <td>
             <div class="d-grid gap-2">
-            <button type="button" class="btn btn-outline-primary btn-sm align-items-end m-1" data-bs-toggle="modal" data-bs-target="#gobuster_modal">Show Detail</button>
+            <button type="button" class="btn btn-outline-primary btn-sm align-items-end m-1" data-bs-toggle="modal" data-bs-target="#feroxbuster_modal">Show Detail</button>
           </div>            
             </td>
-            <!-- gobuster Modal -->
-            <div class="modal fade bd-example-modal-lg" id="gobuster_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <!-- feroxbuster Modal -->
+            <div class="modal fade bd-example-modal-xl" id="feroxbuster_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-xl modal-dialog-scrollable">
                 <div class="modal-content">
                   <div class="modal-header" style="background-color: #353839; color: white;">
-                    <h5 class="modal-title" id="exampleModalLabel"><p class="fs-4 fw-semibold p-1 m-1">Gobuster Result</p></h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><p class="fs-4 fw-semibold p-1 m-1">Feroxbuster Result</p></h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="background-color: #353839; color: white;">
-                  <pre style="white-space: pre-line;">
-                  ' . $gobuster_file . '
-                  </pre>
+                  ' . $feroxbuster_file . '
                   </div>
                   <div class="modal-footer" style="background-color: #353839; color: white;">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -325,10 +345,16 @@ if (!isset($_SESSION['username'])) {
                 </div>
               </div>
             </div>
-            <!-- gobuster Modal End -->
+            <!-- feroxbuster Modal End -->
             
+            <td>
+            <div class="d-grid gap-2">
+            <a href="' . $base_url . '/scan-results/' . 'feroxbuster_' . $id . '_' . $_SESSION['project_id'] . '.html" class="btn btn-outline-secondary btn-sm align-items-end m-1" download><i class="fa-solid fa-file-export"></i> Export</a>
+          </div>            
+            </td>
+
             </tr>
-            <!-- gobuster End--> 
+            <!-- feroxbuster End--> 
               ';
             } else {
               echo '';
@@ -337,6 +363,8 @@ if (!isset($_SESSION['username'])) {
           ?>
           </tbody>
         </table>
+        
+        <p class="fs-6 text-muted"><em>If the scan result is empty, the scan is not finished or an error occured.</em></p>
 
         <!-- Pagination -->
         <nav aria-label="...">

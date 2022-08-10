@@ -73,12 +73,7 @@ if (!isset($_SESSION['username'])) {
             </a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">
-              <span data-feather="reports"></span>
-              Reports
-            </a>
-          </li>
+          
         </ul>
     </nav>
 
@@ -112,7 +107,7 @@ if (isset($_GET['message']) && $_GET['message'] == 'http_error_2' )
 if (isset($_GET['message']) && $_GET['message'] == 'http_error_3' )
 {
      echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-     Choose a wordlist on Gobuster scan!
+     Choose a wordlist on feroxbuster scan!
    </div>';
 }
 ?>
@@ -140,13 +135,6 @@ if (isset($_GET['message']) && $_GET['message'] == 'http_error_3' )
         <label class="form-check-label" for="flexSwitchCheckDefault">Whatweb</label>
         <input class="form-check-input" name="whatweb_check" type="checkbox" role="switch" id="whatweb_chk"></input>
         </div>
-
-        <div id="whatweb_params" style="display: none;" class="m-2">
-          <label class="form-check-label" for="flexSwitchCheckDefault">User Agent</label>
-          <input type="text" class="form-control" name="whatweb_ua" placeholder="e.g Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0" style="width: 50%"></input>
-          <label class="form-check-label" for="flexSwitchCheckDefault">Custom Headers</label>
-          <input type="text" class="form-control" name="whatweb_header" placeholder="eg Foo:Bar" style="width: 50%"></input>  
-        </div>
         
         <div class="form-check form-switch">
         <input class="form-check-input" name="wafw00f_check" type="checkbox" role="switch" id=""></input>
@@ -159,29 +147,29 @@ if (isset($_GET['message']) && $_GET['message'] == 'http_error_3' )
         </div>
 
         <div class="form-check form-switch">
-        <input class="form-check-input" name="gobuster_check" type="checkbox" role="switch" id="gobuster_chk"></input>
-        <label class="form-check-label" for="flexSwitchCheckChecked">Gobuster</label>
+        <input class="form-check-input" name="feroxbuster_check" type="checkbox" role="switch" id="feroxbuster_chk"></input>
+        <label class="form-check-label" for="flexSwitchCheckChecked">Feroxbuster</label>
         </div>
 
-        <div id="gobuster_params" style="display: none;" class="m-2">
+        <div id="feroxbuster_params" style="display: none;" class="m-2">
           <span class="fw-semibold">Wordlist: <span class="fst-italic text-muted">(required)</span></span>
 
         <div class="form-check">
-          <input class="form-check-input" type="radio" id="flexRadioDefault1" value="common.txt" name="gobuster_wordlist">
+          <input class="form-check-input" type="radio" id="flexRadioDefault1" value="common.txt" name="feroxbuster_wordlist">
           <label class="form-check-label" for="flexRadioDefault1">
             common.txt <a href="https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/common.txt" class="text-decoration-none">[Source]</a>
           </label>
         </div>
 
         <div class="form-check">
-          <input class="form-check-input" type="radio" id="flexRadioDefault1" value="big.txt" name="gobuster_wordlist">
+          <input class="form-check-input" type="radio" id="flexRadioDefault1" value="big.txt" name="feroxbuster_wordlist">
           <label class="form-check-label" for="flexRadioDefault1">
             big.txt <a href="https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/big.txt" class="text-decoration-none">[Source]</a>
           </label>
         </div>
 
         <div class="form-check">
-          <input class="form-check-input" type="radio" id="flexRadioDefault1" value="directory-list-2.3-medium.txt" name="gobuster_wordlist">
+          <input class="form-check-input" type="radio" id="flexRadioDefault1" value="directory-list-2.3-medium.txt" name="feroxbuster_wordlist">
           <label class="form-check-label" for="flexRadioDefault1">
             directory-list-2.3-medium.txt <a href="https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/directory-list-2.3-medium.txt" class="text-decoration-none">[Source]</a>
           </label>
@@ -243,11 +231,11 @@ for (let i = 0; i < inputSubmit.length; i++) {
     });
 
     $(function () {
-        $("#gobuster_chk").click(function () {
+        $("#feroxbuster_chk").click(function () {
             if ($(this).is(":checked")) {
-                $("#gobuster_params").show();
+                $("#feroxbuster_params").show();
             } else {
-                $("#gobuster_params").hide();
+                $("#feroxbuster_params").hide();
             }
         });
     });

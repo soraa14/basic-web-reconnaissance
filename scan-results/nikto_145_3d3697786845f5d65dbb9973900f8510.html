@@ -10,29 +10,26 @@
 <pre>
 - Nikto v2.1.6
 ---------------------------------------------------------------------------
-+ Target IP:          93.184.216.34
-+ Target Hostname:    example.com
++ Target IP:          104.93.117.216
++ Target Hostname:    www.blibli.com
 + Target Port:        443
 ---------------------------------------------------------------------------
-+ SSL Info:        Subject:  /C=US/ST=California/L=Los Angeles/O=Internet\xC2\xA0Corporation\xC2\xA0for\xC2\xA0Assigned\xC2\xA0Names\xC2\xA0and\xC2\xA0Numbers/CN=www.example.org
++ SSL Info:        Subject:  /jurisdictionC=ID/businessCategory=Private Organization/serialNumber=AHU-0069056.AH.01.02.Tahun 2021/C=ID/L=Central Jakarta City/O=PT Global Digital Niaga Tbk/CN=www.blibli.com
                    Ciphers:  TLS_AES_256_GCM_SHA384
-                   Issuer:   /C=US/O=DigiCert Inc/CN=DigiCert TLS RSA SHA256 2020 CA1
-+ Start Time:         2022-08-03 13:13:22 (GMT7)
+                   Issuer:   /C=US/O=DigiCert Inc/OU=www.digicert.com/CN=DigiCert SHA2 Extended Validation Server CA
++ Start Time:         2022-08-09 11:36:00 (GMT7)
 ---------------------------------------------------------------------------
-+ Server: ECS (sab/5707)
-+ Server banner has changed from 'ECS (sab/5707)' to 'ECS (sab/56BC)' which may suggest a WAF, load balancer or proxy is in place
++ Server: AkamaiGHost
 + The anti-clickjacking X-Frame-Options header is not present.
 + The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
-+ Uncommon header 'x-cache' found, with contents: HIT
++ Uncommon header 'x-reference-error' found, with contents: 18.e45f6276.1660019775.450636dd
++ Uncommon header 'akamai-grn' found, with contents: 0.e45f6276.1660019775.450636dd
 + The site uses SSL and the Strict-Transport-Security HTTP header is not defined.
 + The site uses SSL and Expect-CT header is not present.
 + The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
-+ No CGI Directories found (use '-C all' to force check all possible dirs)
-+ Hostname 'example.com' does not match certificate's names: www.example.org
-+ The Content-Encoding header is set to &quot;deflate&quot; this may mean that the server is vulnerable to the BREACH attack.
-+ Allowed HTTP Methods: OPTIONS, GET, HEAD, POST 
-+ 7788 requests: 0 error(s) and 9 item(s) reported on remote host
-+ End Time:           2022-08-03 15:14:39 (GMT7) (7277 seconds)
++ All CGI directories 'found', use '-C none' to test none
++ 26531 requests: 9 error(s) and 7 item(s) reported on remote host
++ End Time:           2022-08-09 12:43:53 (GMT7) (4073 seconds)
 ---------------------------------------------------------------------------
 + 1 host(s) tested
 </pre>

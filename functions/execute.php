@@ -17,40 +17,32 @@ session_start();
 
 // nikto
 function runNikto($url, $id, $project_id, $result_path) {
-    shell_exec('nikto -host ' . $url . ' | aha --title export_nikto > ' . $result_path . 'nikto_' . $id . '_' . $project_id . '.txt &'); 
+    $command_nik = 'nikto -host ' . $url . ' | aha --title export_nikto > ' . $result_path . 'nikto_' . $id . '_' . $project_id . '.html &'; 
+    shell_exec($command_nik);
 }
 
 // whatweb
 function runWhatweb($url, $id, $project_id, $result_path) {
-    shell_exec('whatweb -v ' . $url . ' | aha --title export_whatweb > ' . $result_path . 'whatweb_' . $id . '_' . $project_id . '.txt &'); 
-}
-
-function runWhatwebUserAgent($url, $id, $project_id, $result_path, $params) {
-    shell_exec('whatweb --user-agent ' . $params . ' -v ' . $url . ' | aha --title export_whatweb > ' . $result_path . 'whatweb_' . $id . '_' . $project_id . '.txt &'); 
-}
-
-function runWhatwebHeader($url, $id, $project_id, $result_path, $params) {
-    shell_exec('whatweb --header ' . $params . ' -v ' . $url . ' | aha --title export_whatweb > ' . $result_path . 'whatweb_' . $id . '_' . $project_id . '.txt &'); 
-}
-
-function runWhatwebAllParams($url, $id, $project_id, $result_path, $param1, $param2) {
-    shell_exec('whatweb --user-agent ' . $param1 . ' --header ' . $param2 . ' -v ' . $url . ' | aha --title export_whatweb > ' . $result_path . 'whatweb_' . $id . '_' . $project_id . '.txt &'); 
+    $command_whatw = 'whatweb -v ' . $url . ' | aha --title export_whatweb > ' . $result_path . 'whatweb_' . $id . '_' . $project_id . '.html &'; 
+    shell_exec($command_whatw);
 }
 
 // wafw00f
 function runWafw00f($url, $id, $project_id, $result_path) {
-    shell_exec('wafw00f ' . $url . ' | aha --title export_wafw00f > ' . $result_path . 'wafw00f_' . $id . '_' . $project_id . '.txt &'); 
+    $command_waf = 'wafw00f ' . $url . ' | aha --title export_wafw00f > ' . $result_path . 'wafw00f_' . $id . '_' . $project_id . '.html &'; 
+    shell_exec($command_waf);
 }
 
 // testssl
 function runTestssl($url, $id, $project_id, $result_path) {
-    shell_exec('testssl ' . $url . ' | aha --title export_testssl > ' . $result_path . 'testssl_' . $id . '_' . $project_id . '.txt &');
-    
+    $command_test = 'testssl ' . $url . ' | aha --title export_testssl > ' . $result_path . 'testssl_' . $id . '_' . $project_id . '.html &';
+    shell_exec($command_test);
 }
 
-// gobuster
-function runGobuster($url, $id, $project_id, $result_path, $wordlist) {
-    shell_exec('gobuster dir -u ' . $url . ' -w ' . $wordlist . ' -o ' . $result_path . 'gobuster_' . $id . '_' . $project_id . '.txt --random-agent &'); 
+// feroxbuster
+function runFeroxbuster($url, $id, $project_id, $result_path, $wordlist) {
+    $command_ferox = 'feroxbuster --url ' . $url . ' -w ' . $wordlist . ' -q --no-state | aha --title export_feroxbuster > ' . $result_path . 'feroxbuster_' . $id . '_' . $project_id . '.html &'; 
+    shell_exec($command_ferox);
 }
 
 // Nikto
@@ -66,42 +58,9 @@ if ($row['nikto'] === '1') {
 }
 
 // Whatweb
-if ($row['whatweb'] === '1' AND $row['whatweb_ua'] === '0' AND $row['whatweb_header'] === '0') {
+if ($row['whatweb'] === '1') {
     if ($row['is_executed'] === '0') {
         runWhatweb($url, $id, $project_id, $result_path);
-        $update_exec = "UPDATE projects SET is_executed = '1'";
-        $result = $conn->query($update_exec);
-    } else {
-        header('Location: ' . $base_url . '/home.php?page=1&message=already_executed');
-        die();
-    }
-}
-
-if ($row['whatweb'] === '1' AND $row['whatweb_ua'] != '0' AND $row['whatweb_header'] === '0') {
-    if ($row['is_executed'] === '0') {
-        runWhatwebUserAgent($url, $id, $project_id, $result_path, $row['whatweb_ua']);
-        $update_exec = "UPDATE projects SET is_executed = '1'";
-        $result = $conn->query($update_exec);
-    } else {
-        header('Location: ' . $base_url . '/home.php?page=1&message=already_executed');
-        die();
-    }
-}
-
-if ($row['whatweb'] === '1' AND $row['whatweb_ua'] === '0' AND $row['whatweb_header'] != '0') {
-    if ($row['is_executed'] === '0') {
-        runWhatwebHeader($url, $id, $project_id, $result_path, $row['whatweb_header']);
-        $update_exec = "UPDATE projects SET is_executed = '1'";
-        $result = $conn->query($update_exec);
-    } else {
-        header('Location: ' . $base_url . '/home.php?page=1&message=already_executed');
-        die();
-    }
-}
-
-if ($row['whatweb'] === '1' AND $row['whatweb_ua'] != '0' AND $row['whatweb_header'] !='0') {
-    if ($row['is_executed'] === '0') {
-        runWhatwebAllParams($url, $id, $project_id, $result_path, $row['whatweb_ua'], $row['whatweb_header']);
         $update_exec = "UPDATE projects SET is_executed = '1'";
         $result = $conn->query($update_exec);
     } else {
@@ -134,10 +93,10 @@ if ($row['testssl'] === '1') {
     }
 }
 
-// Gobuster
-if ($row['gobuster'] === '1') {
+// feroxbuster
+if ($row['feroxbuster'] === '1') {
     if ($row['is_executed'] === '0') {
-        runGobuster($url, $id, $project_id, $result_path, $row['gobuster_wordlist']);
+        runFeroxbuster($url, $id, $project_id, $result_path, $row['feroxbuster_wordlist']);
         $update_exec = "UPDATE projects SET is_executed = '1'";
         $result = $conn->query($update_exec);
     } else {
@@ -145,4 +104,5 @@ if ($row['gobuster'] === '1') {
         die();
     }
 }
+
 header('Location: ' . $base_url . '/home.php?page=1');

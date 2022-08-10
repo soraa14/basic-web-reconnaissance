@@ -72,12 +72,7 @@ if (!isset($_SESSION['username'])) {
             </a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="reports.php">
-              <span data-feather="reports"></span>
-              Reports
-            </a>
-          </li>
+          
         </ul>
     </nav>
 
@@ -123,7 +118,7 @@ if (!isset($_SESSION['username'])) {
 
             $no = $position + 1;
             $project_id = $_SESSION['project_id'];
-            $sql = "SELECT id, project_name, nikto, whatweb, wafw00f, testssl, gobuster FROM projects WHERE project_owner_id = ? limit ?, ?";
+            $sql = "SELECT id, project_name, nikto, whatweb, wafw00f, testssl, feroxbuster FROM projects WHERE project_owner_id = ? limit ?, ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sii", $project_id, $position, $limit);
             $stmt->execute();
@@ -154,8 +149,8 @@ if (!isset($_SESSION['username'])) {
                 if ($row['testssl'] === 1) {
                   echo '<span class="badge bg-dark m-1">Testssl</span>';
                 }
-                if ($row['gobuster'] === 1) {
-                  echo '<span class="badge bg-dark m-1">Gobuster</span>';
+                if ($row['feroxbuster'] === 1) {
+                  echo '<span class="badge bg-dark m-1">Feroxbuster</span>';
                 }
                 ?>
                 <?= '<td>' ?>

@@ -14,11 +14,11 @@ if (!isset($_SESSION['username'])) {
     $project_id = $_SESSION['project_id'];
 
     $files = array(
-      'nikto_' . $id . '_' . $project_id . '.txt', 
-      'whatweb_' . $id . '_' . $project_id . '.txt', 
-      'wafw00f_' . $id . '_' . $project_id . '.txt', 
-      'testssl_' . $id . '_' . $project_id . '.txt', 
-      'gobuster_' . $id . '_' . $project_id . '.txt'
+      'nikto_' . $id . '_' . $project_id . '.html', 
+      'whatweb_' . $id . '_' . $project_id . '.html', 
+      'wafw00f_' . $id . '_' . $project_id . '.html', 
+      'testssl_' . $id . '_' . $project_id . '.html', 
+      'feroxbuster_' . $id . '_' . $project_id . '.html'
     );
 
     foreach ($files as $file) {
