@@ -21,10 +21,10 @@ if (!isset($_SESSION['username'])) {
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
 
-    
+
 
     <!-- Bootstrap core CSS -->
-    <link href=" 	https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="        https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -42,13 +42,13 @@ if (!isset($_SESSION['username'])) {
       }
     </style>
 
-    
+
     <!-- Custom styles for this template -->
     <link href="assets/css/dashboard.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/6c966798cf.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    
+
   <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Basic Web Reconnaissance</a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,7 +73,7 @@ if (!isset($_SESSION['username'])) {
             </a>
           </li>
 
-          
+
         </ul>
     </nav>
 
@@ -81,10 +81,10 @@ if (!isset($_SESSION['username'])) {
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Scans</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-        <a href="profile.php"><button type="button" class="btn btn-sm btn-outline-dark m-1"><i class="fa-solid fa-user"></i> <?= htmlspecialchars($_SESSION['username']); ?></button></a>
-          
+        <button class="btn btn-sm btn-dark m-1" disabled><i class="fa-solid fa-user"></i> <?= htmlspecialchars($_SESSION['username']); ?></button>
+
         <a href="home.php"><button type="button" class="btn btn-sm btn-outline-success m-1"><i class="fa-solid fa-house"></i> Home</button></a>
-          
+
         </div>
       </div>
 
@@ -124,7 +124,7 @@ if (isset($_GET['message']) && $_GET['message'] == 'http_error_3' )
 
         <label for="basic-url" class="form-label">Select Tools:</label>
 
-        <div class="form-check form-switch">      
+        <div class="form-check form-switch">
         <label class="form-check-label" for="flexSwitchCheckDefault">Nikto
         <input class="form-check-input" name="nikto_check" type="checkbox" role="switch" id="flexSwitchCheckDefault"></input>
         </label>
@@ -135,7 +135,7 @@ if (isset($_GET['message']) && $_GET['message'] == 'http_error_3' )
         <label class="form-check-label" for="flexSwitchCheckDefault">Whatweb</label>
         <input class="form-check-input" name="whatweb_check" type="checkbox" role="switch" id="whatweb_chk"></input>
         </div>
-        
+
         <div class="form-check form-switch">
         <input class="form-check-input" name="wafw00f_check" type="checkbox" role="switch" id=""></input>
         <label class="form-check-label" for="flexSwitchCheckChecked">Wafw00f</label>
@@ -195,7 +195,7 @@ for (let i = 0; i < inputSubmit.length; i++) {
     if (inputSubmit[i].getAttribute("value") == null) {
       inputSubmit[i].setAttribute("value", '1');
     } else if (inputSubmit[i].getAttribute("value") == '1') {
-      inputSubmit[i].removeAttribute("value"); 
+      inputSubmit[i].removeAttribute("value");
     }
   })
 }
@@ -218,7 +218,7 @@ for (let i = 0; i < inputSubmit.length; i++) {
                 $(this).remove();
             });
         }, 1500);
-    });    
+    });
 
     $(function () {
         $("#whatweb_chk").click(function () {
