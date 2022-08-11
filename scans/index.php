@@ -357,25 +357,7 @@ if (!isset($_SESSION['username'])) {
           </tbody>
         </table>
         
-        <p class="fs-6 text-muted"><em>If the scan result is empty, the scan is not finished or an error occured.</em></p>
-
-        <!-- Pagination -->
-        <nav aria-label="...">
-          <ul class="pagination">
-            <li class="page-item disabled">
-              <a class="page-link">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active" aria-current="page">
-              <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          </ul>
-        </nav>
-        <!-- Pagination End -->
+        <p class="fs-6 text-muted"><em>If the scan result is empty or incomplete, the scan is not finished or an error occured.</em></p>
       </div>
       <!-- Main Section End -->
     </main>
