@@ -23,25 +23,25 @@ function runNikto($url, $id, $project_id, $result_path) {
 
 // whatweb
 function runWhatweb($url, $id, $project_id, $result_path) {
-    $command_whatw = 'whatweb -v ' . $url . ' | aha --title export_whatweb > ' . $result_path . 'whatweb_' . $id . '_' . $project_id . '.html &'; 
+    $command_whatw = 'whatweb -v "' . $url . '" | aha --title export_whatweb > ' . $result_path . 'whatweb_' . $id . '_' . $project_id . '.html &'; 
     shell_exec($command_whatw);
 }
 
 // wafw00f
 function runWafw00f($url, $id, $project_id, $result_path) {
-    $command_waf = 'wafw00f ' . $url . ' | aha --title export_wafw00f > ' . $result_path . 'wafw00f_' . $id . '_' . $project_id . '.html &'; 
+    $command_waf = 'wafw00f "' . $url . '" | aha --title export_wafw00f > ' . $result_path . 'wafw00f_' . $id . '_' . $project_id . '.html &'; 
     shell_exec($command_waf);
 }
 
 // testssl
 function runTestssl($url, $id, $project_id, $result_path) {
-    $command_test = 'testssl ' . $url . ' | aha --title export_testssl > ' . $result_path . 'testssl_' . $id . '_' . $project_id . '.html &';
+    $command_test = 'testssl "' . $url . '" | aha --title export_testssl > ' . $result_path . 'testssl_' . $id . '_' . $project_id . '.html &';
     shell_exec($command_test);
 }
 
 // feroxbuster
 function runFeroxbuster($url, $id, $project_id, $result_path, $wordlist) {
-    $command_ferox = 'feroxbuster --url ' . $url . ' -w ' . $wordlist . ' -q --no-state | aha --title export_feroxbuster > ' . $result_path . 'feroxbuster_' . $id . '_' . $project_id . '.html &'; 
+    $command_ferox = 'feroxbuster --url "' . $url . '" -w "' . $wordlist . '" -q --no-state | aha --title export_feroxbuster > ' . $result_path . 'feroxbuster_' . $id . '_' . $project_id . '.html &'; 
     shell_exec($command_ferox);
 }
 
